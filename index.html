@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tạo khung avatar trực tuyến bằng HTML, CSS và JavaScript." />
+  <title>Tạo Khung Avatar | HTML CSS JavaScript</title>
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #12213c;
+      background: #f4f7fc;
+      font-synthesis: none;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e7edf5;
+    }
+
+    .header-inner {
+      max-width: 1160px;
+      margin: auto;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      color: white;
+      font-weight: 900;
+      background: linear-gradient(135deg, #2563eb, #8b5cf6);
+      font-size: 22px;
+    }
+
+    .header-inner strong {
+      font-size: 21px;
+      letter-spacing: -.025em;
+    }
+
+    .header-inner small {
+      display: block;
+      color: #64748b;
+      margin-top: 3px;
+    }
+
+    main {
+      max-width: 1160px;
+      margin: 32px auto 56px;
+      padding: 0 24px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 3vw, 38px);
+      letter-spacing: -.045em;
+      margin: 0 0 8px;
+    }
+
+    .lead {
+      color: #64748b;
+      margin: 0 0 26px;
+      line-height: 1.65;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(330px, .9fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid #e5ebf3;
+      box-shadow: 0 15px 45px rgba(26, 51, 89, .055);
+      border-radius: 22px;
+      padding: 25px;
+    }
+
+    .preview-panel {
+      position: sticky;
+      top: 20px;
+      text-align: center;
+    }
+
+    .panel-title {
+      font-size: 18px;
+      font-weight: 750;
+      margin: 0 0 17px;
+      text-align: left;
+    }
+
+    .preview-bg {
+      width: 100%;
+      max-width: 495px;
+      margin: auto;
+      aspect-ratio: 1;
+      padding: 12px;
+      border: 1px dashed #c6d7ee;
+      border-radius: 20px;
+      background-color: #f9fbff;
+      background-image: radial-gradient(#d7e3f3 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      cursor: grab;
+      outline-offset: 4px;
+    }
+
+    canvas:active {
+      cursor: grabbing;
+    }
+
+    .hint {
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 16px 0 0;
+    }
+
+    .section-heading {
+      display: flex;
+      gap: 11px;
+      align-items: center;
+      font-size: 15px;
+      font-weight: 780;
+      margin: 0 0 14px;
+    }
+
+    .step {
+      flex: none;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #eaf0ff;
+      color: #1d4ed8;
+      width: 26px;
+      height: 26px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .section+.section {
+      border-top: 1px solid #edf1f7;
+      padding-top: 23px;
+      margin-top: 23px;
+    }
+
+    .file-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+      cursor: pointer;
+      border: 1.5px dashed #96b5ec;
+      background: #f4f8ff;
+      padding: 16px;
+      border-radius: 12px;
+      font-weight: 650;
+      color: #1e4eaa;
+    }
+
+    .file-box:hover,
+    .file-box:focus-within {
+      background: #eaf2ff;
+      border-color: #2563eb;
+    }
+
+    .file-box input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    .microcopy {
+      margin: 9px 0 0;
+      color: #718096;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .frame-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .frame-choice {
+      border: 2px solid #e3e9f4;
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px 5px;
+      color: #344767;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .frame-choice[aria-pressed="true"] {
+      border-color: #2563eb;
+      color: #1d4ed8;
+      background: #f3f7ff;
+    }
+
+    .sample-ring {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: conic-gradient(#2563eb, #7c3aed, #f97316, #2563eb);
+      position: relative;
+    }
+
+    .sample-ring::before {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .sample-ring.tech {
+      background: conic-gradient(#07d7ec, #0f172a, #3b82f6, #07d7ec);
+    }
+
+    .sample-ring.festival {
+      background: conic-gradient(#f97316, #e11d48, #facc15, #f97316);
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .form-label {
+      display: block;
+      margin: 0 0 8px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .text-input {
+      display: block;
+      width: 100%;
+      border: 1px solid #ced8e8;
+      border-radius: 10px;
+      padding: 11px 12px;
+      color: #14253c;
+      outline-color: #2563eb;
+    }
+
+    .range {
+      width: 100%;
+      accent-color: #2563eb;
+    }
+
+    .two-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 15px;
+    }
+
+    .color-input {
+      height: 42px;
+      width: 100%;
+      cursor: pointer;
+      padding: 5px;
+      background: white;
+      border: 1px solid #ced8e8;
+      border-radius: 10px;
+    }
+
+    .btn {
+      width: 100%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 15px;
+      border-radius: 11px;
+      border: 1px solid transparent;
+      font-weight: 780;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #174bc9;
+    }
+
+    .btn-primary:disabled {
+      cursor: not-allowed;
+      background: #a9bce0;
+    }
+
+    .btn-outline {
+      background: white;
+      border-color: #d1dbea;
+      color: #344767;
+      margin-top: 10px;
+    }
+
+    .btn-outline:hover {
+      background: #f1f5fb;
+    }
+
+    .status {
+      min-height: 1.4em;
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 9px;
+    }
+
+    footer {
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+      margin-top: 26px;
+    }
+
+    @media (max-width: 800px) {
+      main {
+        margin-top: 22px;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-panel {
+        position: static;
+      }
+    }
+
+    @media (max-width: 450px) {
+      main {
+        padding: 0 14px;
+      }
+
+      .header-inner {
+        padding: 14px;
+      }
+
+      .panel {
+        padding: 16px;
+        border-radius: 16px;
+      }
+
+      .preview-bg {
+        padding: 7px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="mark" aria-hidden="true">A</div>
+      <div><strong>Avatar Studio</strong><small>Tạo khung avatar dễ dàng</small></div>
+    </div>
+  </header>
+  <main>
+    <h1>Tạo khung Avatar của bạn</h1>
+    <p class="lead">Chọn ảnh, thiết kế khung, căn chỉnh theo ý thích và tải ảnh PNG. Ảnh được xử lý ngay trong trình
+      duyệt, không gửi lên máy chủ.</p>
+    <div class="layout">
+      <section class="panel preview-panel" aria-labelledby="preview-heading">
+        <h2 class="panel-title" id="preview-heading">Xem trước avatar</h2>
+        <div class="preview-bg">
+          <canvas id="avatarCanvas" width="1080" height="1080" tabindex="0"
+            aria-label="Khung xem trước. Kéo ảnh bằng chuột hoặc vuốt, dùng phím mũi tên để điều chỉnh ảnh."></canvas>
+        </div>
+        <p class="hint">Kéo ảnh để thay đổi vị trí • Dùng thanh trượt để phóng to • Xuất hình 1080 × 1080 px</p>
+      </section>
+      <section class="panel" aria-label="Công cụ tùy chỉnh avatar">
+        <div class="section">
+          <h2 class="section-heading"><span class="step">1</span> Tải ảnh cá nhân</h2>
+          <label class="file-box" for="photoInput">📷 Chọn ảnh từ thiết bị
+            <input id="photoInput" type="file" accept="image/*" />
+          </label>
+          <p class="microcopy" id="fileName">Hỗ trợ JPG, PNG, WEBP. Nên dùng ảnh rõ mặt và kích thước lớn.</p>
+        </div>
+        <div class="section">
+          <h2 class="section-heading"><span class="step">2</span> Chọn mẫu khung</h2>
+          <div class="frame-grid" aria-label="Mẫu khung">
+            <button class="frame-choice" type="button" data-frame="classic" aria-pressed="true"><span
+                class="sample-ring"></span>Cổ điển</button>
+            <button class="frame-choice" type="button" data-frame="tech" aria-pressed="false"><span
+                class="sample-ring tech"></span>Công nghệ</button>
+            <button class="frame-choice" type="button" data-frame="festival" aria-pressed="false"><span
+                class="sample-ring festival"></span>Sự kiện</button>
+          </div>
+          <label class="file-box" for="frameInput" style="margin-top: 14px; padding: 11px; font-size: 13px;">＋ Hoặc tải
+            khung PNG trong suốt
+            <input id="frameInput" type="file" accept="image/png" />
+          </label>
+          <p class="microcopy">Với khung PNG riêng: phần giữa cần trong suốt để thấy ảnh bên dưới. Khung nên vuông, kích
+            thước 1080 × 1080 px.</p>
+        </div>
+        <div class="section">
+          <h2 class="section-heading"><span class="step">3</span> Tùy chỉnh</h2>
+          <label for="bannerText" class="form-label">Dòng chữ trên khung có sẵn</label>
+          <input id="bannerText" class="text-input" type="text" readonly maxlength="32" value="CHÀO ĐÓN TÂN SINH VIÊN K50"
+            placeholder="Ví dụ: CHÀO TÂN SINH VIÊN" />
+          <div class="two-cols">
+            <div><label for="primaryColor" class="form-label">Màu chủ đạo</label><input id="primaryColor"
+                class="color-input" type="color" value="#2563eb" /></div>
+            <div><label for="secondaryColor" class="form-label">Màu phụ</label><input id="secondaryColor"
+                class="color-input" type="color" value="#8b5cf6" /></div>
+          </div>
+          <div style="margin-top: 19px;">
+            <div class="row"><label for="zoom" class="form-label">Phóng to ảnh</label><span id="zoomValue"
+                style="font-size: 13px; color: #64748b;">100%</span></div>
+            <input class="range" id="zoom" type="range" min="1" max="3" step="0.01" value="1" />
+          </div>
+          <button id="resetBtn" class="btn btn-outline" type="button">↺ Đưa ảnh về giữa</button>
+        </div>
+        <div class="section">
+          <h2 class="section-heading"><span class="step">4</span> Lưu thành phẩm</h2>
+          <button id="downloadBtn" class="btn btn-primary" type="button" disabled>⬇ Tải avatar PNG</button>
+          <p class="status" id="status" role="status" aria-live="polite">Hãy chọn ảnh để bắt đầu.</p>
+        </div>
+      </section>
+    </div>
+    <footer>Xây dựng bằng HTML + CSS + JavaScript (Canvas API). Không yêu cầu thư viện bên ngoài.</footer>
+  </main>
+  <script>
+    "use strict";
+    const SIZE = 1080;
+    const CX = SIZE / 2;
+    const CY = SIZE / 2;
+    const PHOTO_RADIUS = 454;
+    const canvas = document.querySelector("#avatarCanvas");
+    const ctx = canvas.getContext("2d");
+    const el = (selector) => document.querySelector(selector);
+    const photoInput = el("#photoInput");
+    const frameInput = el("#frameInput");
+    const zoomInput = el("#zoom");
+    const zoomValue = el("#zoomValue");
+    const bannerInput = el("#bannerText");
+    const primaryInput = el("#primaryColor");
+    const secondaryInput = el("#secondaryColor");
+    const downloadBtn = el("#downloadBtn");
+    const status = el("#status");
+
+    const state = {
+      photo: null,
+      customFrame: null,
+      frame: "classic",
+      zoom: 1,
+      dx: 0,
+      dy: 0,
+      dragging: false,
+      lastX: 0,
+      lastY: 0
+    };
+
+    function setStatus(message) { status.textContent = message; }
+
+    // Ảnh luôn phủ kín khung vuông; phần dư được cắt đi, không làm méo ảnh.
+    function getPhotoMetrics() {
+      if (!state.photo) return null;
+      const img = state.photo;
+      const cover = Math.max(SIZE / img.naturalWidth, SIZE / img.naturalHeight);
+      const width = img.naturalWidth * cover * state.zoom;
+      const height = img.naturalHeight * cover * state.zoom;
+      return { width, height };
+    }
+
+    function clampPosition() {
+      const metrics = getPhotoMetrics();
+      if (!metrics) return;
+      const maxX = (metrics.width - SIZE) / 2;
+      const maxY = (metrics.height - SIZE) / 2;
+      state.dx = Math.min(maxX, Math.max(-maxX, state.dx));
+      state.dy = Math.min(maxY, Math.max(-maxY, state.dy));
+    }
+
+    function drawCircle(x, y, radius, fill) {
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = fill;
+      ctx.fill();
+    }
+
+    function drawRoundRect(x, y, w, h, r, fill) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+      ctx.fillStyle = fill;
+      ctx.fill();
+    }
+
+    function drawPhoto(circleCrop) {
+      if (circleCrop) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(CX, CY, PHOTO_RADIUS, 0, 2 * Math.PI);
+        ctx.clip();
+      }
+      if (state.photo) {
+        const { width, height } = getPhotoMetrics();
+        ctx.drawImage(state.photo, CX + state.dx - width / 2, CY + state.dy - height / 2, width, height);
+      } else {
+        const gradient = ctx.createLinearGradient(0, 0, SIZE, SIZE);
+        gradient.addColorStop(0, "#eff6ff");
+        gradient.addColorStop(1, "#dbeafe");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, SIZE, SIZE);
+        drawCircle(CX, 430, 125, "#9cb7d9");
+        drawCircle(CX, 900, 330, "#9cb7d9");
+        ctx.font = "700 48px system-ui, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#1e3a8a";
+        ctx.fillText("CHỌN ẢNH CỦA BẠN", CX, 750);
+      }
+      if (circleCrop) ctx.restore();
+    }
+
+    function drawBanner() {
+      const text = bannerInput.value.trim();
+      if (!text) return;
+      const primary = primaryInput.value;
+      const secondary = secondaryInput.value;
+      ctx.save();
+      ctx.shadowColor = "rgba(0,0,0,.2)";
+      ctx.shadowBlur = 23;
+      ctx.shadowOffsetY = 8;
+      const bannerGradient = ctx.createLinearGradient(240, 0, 840, 0);
+      bannerGradient.addColorStop(0, primary);
+      bannerGradient.addColorStop(1, secondary);
+      drawRoundRect(180, 885, 720, 105, 52, bannerGradient);
+      ctx.shadowColor = "transparent";
+      ctx.fillStyle = "#fff";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      let fontSize = 55;
+      do {
+        ctx.font = `800 ${fontSize}px system-ui, sans-serif`;
+        if (ctx.measureText(text).width <= 640) break;
+        fontSize -= 2;
+      } while (fontSize > 24);
+      ctx.fillText(text, CX, 935, 640);
+      ctx.restore();
+    }
+
+    function drawPreset() {
+      const primary = primaryInput.value;
+      const secondary = secondaryInput.value;
+      const gradient = ctx.createLinearGradient(0, 0, SIZE, SIZE);
+      if (state.frame === "festival") {
+        gradient.addColorStop(0, "#f97316");
+        gradient.addColorStop(.55, "#ef4444");
+        gradient.addColorStop(1, "#facc15");
+      } else if (state.frame === "tech") {
+        gradient.addColorStop(0, "#07162f");
+        gradient.addColorStop(.5, "#0b3c73");
+        gradient.addColorStop(1, "#081229");
+      } else {
+        gradient.addColorStop(0, primary);
+        gradient.addColorStop(.5, secondary);
+        gradient.addColorStop(1, primary);
+      }
+      drawCircle(CX, CY, 535, gradient);
+      drawCircle(CX, CY, 478, "rgba(255,255,255,.95)");
+      drawPhoto(true);
+      ctx.beginPath();
+      ctx.arc(CX, CY, PHOTO_RADIUS + 8, 0, Math.PI * 2);
+      ctx.strokeStyle = state.frame === "tech" ? "#24e1f2" : "rgba(255,255,255,.98)";
+      ctx.lineWidth = 12;
+      ctx.stroke();
+
+      if (state.frame === "tech") {
+        for (let i = 0; i < 40; i++) {
+          const a = (i / 40) * Math.PI * 2;
+          ctx.beginPath();
+          ctx.moveTo(CX + Math.cos(a) * 489, CY + Math.sin(a) * 489);
+          ctx.lineTo(CX + Math.cos(a) * (i % 5 === 0 ? 521 : 508), CY + Math.sin(a) * (i % 5 === 0 ? 521 : 508));
+          ctx.strokeStyle = i % 5 === 0 ? "#67e8f9" : "#60a5fa";
+          ctx.lineWidth = i % 5 === 0 ? 9 : 4;
+          ctx.stroke();
+        }
+      } else if (state.frame === "festival") {
+        for (let i = 0; i < 36; i++) {
+          const a = (i / 36) * Math.PI * 2;
+          const colors = ["#fff7ed", "#fef08a", "#fb7185", "#ffffff"];
+          drawCircle(CX + Math.cos(a) * 505, CY + Math.sin(a) * 505, i % 3 === 0 ? 9 : 5, colors[i % colors.length]);
+        }
+      } else {
+        for (let i = 0; i < 18; i++) {
+          const a = (i / 18) * Math.PI * 2;
+          drawCircle(CX + Math.cos(a) * 504, CY + Math.sin(a) * 504, 6, "rgba(255,255,255,.7)");
+        }
+      }
+      drawBanner();
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, SIZE, SIZE);
+      if (state.frame === "custom" && state.customFrame) {
+        drawPhoto(false); // Khung PNG tùy biến phủ lên toàn bộ ảnh vuông.
+        ctx.drawImage(state.customFrame, 0, 0, SIZE, SIZE);
+      } else {
+        drawPreset();
+      }
+    }
+
+    function loadImage(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Không đọc được ảnh.")); };
+        img.src = url;
+      });
+    }
+
+    photoInput.addEventListener("change", async () => {
+      const file = photoInput.files?.[0];
+      if (!file) return;
+      if (!file.type.startsWith("image/")) { setStatus("Vui lòng chọn một tệp ảnh hợp lệ."); return; }
+      try {
+        state.photo = await loadImage(file);
+        state.dx = 0;
+        state.dy = 0;
+        state.zoom = 1;
+        zoomInput.value = "1";
+        zoomValue.textContent = "100%";
+        downloadBtn.disabled = false;
+        el("#fileName").textContent = `Đã chọn: ${file.name}`;
+        setStatus("Đã tải ảnh. Bạn có thể kéo ảnh để căn chỉnh.");
+        render();
+      } catch (error) { setStatus(error.message); }
+    });
+
+    frameInput.addEventListener("change", async () => {
+      const file = frameInput.files?.[0];
+      if (!file) return;
+      if (file.type !== "image/png") { setStatus("Khung tải lên phải là tệp PNG."); return; }
+      try {
+        state.customFrame = await loadImage(file);
+        state.frame = "custom";
+        document.querySelectorAll("[data-frame]").forEach(btn => btn.setAttribute("aria-pressed", "false"));
+        setStatus(`Đã chọn khung: ${file.name}`);
+        render();
+      } catch (error) { setStatus(error.message); }
+    });
+
+    document.querySelectorAll("[data-frame]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.frame = btn.dataset.frame;
+        document.querySelectorAll("[data-frame]").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+        render();
+      });
+    });
+
+    zoomInput.addEventListener("input", () => {
+      state.zoom = Number(zoomInput.value);
+      zoomValue.textContent = `${Math.round(state.zoom * 100)}%`;
+      clampPosition();
+      render();
+    });
+    [bannerInput, primaryInput, secondaryInput].forEach(input => input.addEventListener("input", render));
+
+    el("#resetBtn").addEventListener("click", () => {
+      state.zoom = 1;
+      state.dx = 0;
+      state.dy = 0;
+      zoomInput.value = "1";
+      zoomValue.textContent = "100%";
+      render();
+    });
+
+    function canvasPoint(event) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: (event.clientX - rect.left) * (SIZE / rect.width),
+        y: (event.clientY - rect.top) * (SIZE / rect.height)
+      };
+    }
+    canvas.addEventListener("pointerdown", event => {
+      if (!state.photo) return;
+      const p = canvasPoint(event);
+      state.dragging = true;
+      state.lastX = p.x;
+      state.lastY = p.y;
+      canvas.setPointerCapture(event.pointerId);
+    });
+    canvas.addEventListener("pointermove", event => {
+      if (!state.dragging || !state.photo) return;
+      const p = canvasPoint(event);
+      state.dx += p.x - state.lastX;
+      state.dy += p.y - state.lastY;
+      state.lastX = p.x;
+      state.lastY = p.y;
+      clampPosition();
+      render();
+    });
+    function stopDragging() { state.dragging = false; }
+    canvas.addEventListener("pointerup", stopDragging);
+    canvas.addEventListener("pointercancel", stopDragging);
+    canvas.addEventListener("lostpointercapture", stopDragging);
+    canvas.addEventListener("keydown", event => {
+      if (!state.photo) return;
+      const movement = {
+        ArrowLeft: [-12, 0], ArrowRight: [12, 0],
+        ArrowUp: [0, -12], ArrowDown: [0, 12]
+      }[event.key];
+      if (!movement) return;
+      event.preventDefault();
+      state.dx += movement[0];
+      state.dy += movement[1];
+      clampPosition();
+      render();
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      if (!state.photo) return;
+      render();
+      canvas.toBlob(blob => {
+        if (!blob) { setStatus("Không thể xuất ảnh. Hãy thử lại."); return; }
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "avatar-1080x1080.png";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        setStatus("Đã tạo ảnh PNG 1080 × 1080 px.");
+      }, "image/png");
+    });
+
+    render();
+  </script>
+</body>
+
+</html>
