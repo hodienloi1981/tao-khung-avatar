@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Tạo khung avatar trực tuyến bằng HTML, CSS và JavaScript." />
-  <title>Tạo Khung Avatar | HTML CSS JavaScript</title>
+  <title>Khoa CNTT - Trường Cao Đẳng Công Thương TP. Hồ Chí Minh</title>
   <style>
     :root {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -210,56 +210,6 @@
       line-height: 1.55;
     }
 
-    .frame-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .frame-choice {
-      border: 2px solid #e3e9f4;
-      border-radius: 12px;
-      background: #fff;
-      padding: 12px 5px;
-      color: #344767;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      align-items: center;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .frame-choice[aria-pressed="true"] {
-      border-color: #2563eb;
-      color: #1d4ed8;
-      background: #f3f7ff;
-    }
-
-    .sample-ring {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: conic-gradient(#2563eb, #7c3aed, #f97316, #2563eb);
-      position: relative;
-    }
-
-    .sample-ring::before {
-      content: "";
-      position: absolute;
-      inset: 9px;
-      border-radius: 50%;
-      background: #fff;
-    }
-
-    .sample-ring.tech {
-      background: conic-gradient(#07d7ec, #0f172a, #3b82f6, #07d7ec);
-    }
-
-    .sample-ring.festival {
-      background: conic-gradient(#f97316, #e11d48, #facc15, #f97316);
-    }
-
     .row {
       display: flex;
       align-items: center;
@@ -272,16 +222,6 @@
       margin: 0 0 8px;
       font-size: 13px;
       font-weight: 700;
-    }
-
-    .text-input {
-      display: block;
-      width: 100%;
-      border: 1px solid #ced8e8;
-      border-radius: 10px;
-      padding: 11px 12px;
-      color: #14253c;
-      outline-color: #2563eb;
     }
 
     .range {
@@ -395,13 +335,13 @@
 <body>
   <header>
     <div class="header-inner">
-      <div class="mark" aria-hidden="true">A</div>
-      <div><strong>Avatar Studio</strong><small>Tạo khung avatar dễ dàng</small></div>
+      <div class="mark" aria-hidden="true">FIT</div>
+      <div><strong>Khoa CNTT</strong><small>Công nghệ - Vững bước - Tương Lai</small></div>
     </div>
   </header>
   <main>
     <h1>Tạo khung Avatar của bạn</h1>
-    <p class="lead">Chọn ảnh, thiết kế khung, căn chỉnh theo ý thích và tải ảnh PNG. Ảnh được xử lý ngay trong trình
+    <p class="lead">Chọn ảnh, căn chỉnh theo ý thích và tải ảnh PNG. Ảnh được xử lý ngay trong trình
       duyệt, không gửi lên máy chủ.</p>
     <div class="layout">
       <section class="panel preview-panel" aria-labelledby="preview-heading">
@@ -421,30 +361,10 @@
           <p class="microcopy" id="fileName">Hỗ trợ JPG, PNG, WEBP. Nên dùng ảnh rõ mặt và kích thước lớn.</p>
         </div>
         <div class="section">
-          <h2 class="section-heading"><span class="step">2</span> Chọn mẫu khung</h2>
-          <div class="frame-grid" aria-label="Mẫu khung">
-            <button class="frame-choice" type="button" data-frame="classic" aria-pressed="true"><span
-                class="sample-ring"></span>Cổ điển</button>
-            <button class="frame-choice" type="button" data-frame="tech" aria-pressed="false"><span
-                class="sample-ring tech"></span>Công nghệ</button>
-            <button class="frame-choice" type="button" data-frame="festival" aria-pressed="false"><span
-                class="sample-ring festival"></span>Sự kiện</button>
-          </div>
-          <label class="file-box" for="frameInput" style="margin-top: 14px; padding: 11px; font-size: 13px;">＋ Hoặc tải
-            khung PNG trong suốt
-            <input id="frameInput" type="file" accept="image/png" />
-          </label>
-          <p class="microcopy">Với khung PNG riêng: phần giữa cần trong suốt để thấy ảnh bên dưới. Khung nên vuông, kích
-            thước 1080 × 1080 px.</p>
-        </div>
-        <div class="section">
-          <h2 class="section-heading"><span class="step">3</span> Tùy chỉnh</h2>
-          <label for="bannerText" class="form-label">Dòng chữ trên khung có sẵn</label>
-          <input id="bannerText" class="text-input" type="text" readonly maxlength="32" value="CHÀO ĐÓN TÂN SINH VIÊN K50"
-            placeholder="Ví dụ: CHÀO TÂN SINH VIÊN" />
+          <h2 class="section-heading"><span class="step">2</span> Tùy chỉnh</h2>
           <div class="two-cols">
             <div><label for="primaryColor" class="form-label">Màu chủ đạo</label><input id="primaryColor"
-                class="color-input" type="color" value="#2563eb" /></div>
+                class="color-input" type="color" value="#007fbd" /></div>
             <div><label for="secondaryColor" class="form-label">Màu phụ</label><input id="secondaryColor"
                 class="color-input" type="color" value="#8b5cf6" /></div>
           </div>
@@ -456,28 +376,25 @@
           <button id="resetBtn" class="btn btn-outline" type="button">↺ Đưa ảnh về giữa</button>
         </div>
         <div class="section">
-          <h2 class="section-heading"><span class="step">4</span> Lưu thành phẩm</h2>
+          <h2 class="section-heading"><span class="step">3</span> Lưu thành phẩm</h2>
           <button id="downloadBtn" class="btn btn-primary" type="button" disabled>⬇ Tải avatar PNG</button>
           <p class="status" id="status" role="status" aria-live="polite">Hãy chọn ảnh để bắt đầu.</p>
         </div>
       </section>
     </div>
-    <footer>Xây dựng bằng HTML + CSS + JavaScript (Canvas API). Không yêu cầu thư viện bên ngoài.</footer>
+    <footer>Thiết kế bởi: Hồ Diên Lợi - Khoa CNTT - Trường cao đẳng Công Thương TP. Hồ Chí Minh</footer>
   </main>
   <script>
     "use strict";
     const SIZE = 1080;
     const CX = SIZE / 2;
     const CY = SIZE / 2;
-    const PHOTO_RADIUS = 454;
     const canvas = document.querySelector("#avatarCanvas");
     const ctx = canvas.getContext("2d");
     const el = (selector) => document.querySelector(selector);
     const photoInput = el("#photoInput");
-    const frameInput = el("#frameInput");
     const zoomInput = el("#zoom");
     const zoomValue = el("#zoomValue");
-    const bannerInput = el("#bannerText");
     const primaryInput = el("#primaryColor");
     const secondaryInput = el("#secondaryColor");
     const downloadBtn = el("#downloadBtn");
@@ -485,8 +402,6 @@
 
     const state = {
       photo: null,
-      customFrame: null,
-      frame: "classic",
       zoom: 1,
       dx: 0,
       dy: 0,
@@ -523,27 +438,11 @@
       ctx.fill();
     }
 
-    function drawRoundRect(x, y, w, h, r, fill) {
-      ctx.beginPath();
-      ctx.moveTo(x + r, y);
-      ctx.lineTo(x + w - r, y);
-      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-      ctx.lineTo(x + w, y + h - r);
-      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-      ctx.lineTo(x + r, y + h);
-      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-      ctx.lineTo(x, y + r);
-      ctx.quadraticCurveTo(x, y, x + r, y);
-      ctx.closePath();
-      ctx.fillStyle = fill;
-      ctx.fill();
-    }
-
     function drawPhoto(circleCrop) {
       if (circleCrop) {
         ctx.save();
         ctx.beginPath();
-        ctx.arc(CX, CY, PHOTO_RADIUS, 0, 2 * Math.PI);
+        ctx.arc(CX, CY, 444, 0, 2 * Math.PI);
         ctx.clip();
       }
       if (state.photo) {
@@ -565,92 +464,121 @@
       if (circleCrop) ctx.restore();
     }
 
-    function drawBanner() {
-      const text = bannerInput.value.trim();
-      if (!text) return;
-      const primary = primaryInput.value;
-      const secondary = secondaryInput.value;
+    // Vẽ từng ký tự theo tiếp tuyến để chữ bám theo vòng tròn, không cần ảnh logo.
+    function drawArcText(text, radius, centerAngle, span, fontSize, bottom = false) {
       ctx.save();
-      ctx.shadowColor = "rgba(0,0,0,.2)";
-      ctx.shadowBlur = 23;
-      ctx.shadowOffsetY = 8;
-      const bannerGradient = ctx.createLinearGradient(240, 0, 840, 0);
-      bannerGradient.addColorStop(0, primary);
-      bannerGradient.addColorStop(1, secondary);
-      drawRoundRect(180, 885, 720, 105, 52, bannerGradient);
-      ctx.shadowColor = "transparent";
+      ctx.font = `700 ${fontSize}px Arial, sans-serif`;
       ctx.fillStyle = "#fff";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      let fontSize = 55;
-      do {
-        ctx.font = `800 ${fontSize}px system-ui, sans-serif`;
-        if (ctx.measureText(text).width <= 640) break;
-        fontSize -= 2;
-      } while (fontSize > 24);
-      ctx.fillText(text, CX, 935, 640);
+      // Giữ dấu tiếng Việt cùng ký tự gốc.
+      const letters = Array.from(text.normalize("NFC"));
+      const widths = letters.map(letter => ctx.measureText(letter).width);
+      const spacing = 3;
+      const total = widths.reduce((sum, width) => sum + width + spacing, 0);
+      const scale = Math.min(1, radius * span / total);
+      const angleWidth = total * scale / radius;
+      const direction = bottom ? -1 : 1;
+      let angle = centerAngle - direction * angleWidth / 2;
+      letters.forEach((letter, index) => {
+        const advance = (widths[index] + spacing) * scale / radius;
+        const middle = angle + direction * advance / 2;
+        ctx.save();
+        ctx.translate(CX + Math.cos(middle) * radius, CY + Math.sin(middle) * radius);
+        ctx.rotate(middle + (bottom ? -Math.PI / 2 : Math.PI / 2));
+        ctx.scale(scale, scale);
+        ctx.fillText(letter, 0, 0);
+        ctx.restore();
+        angle += direction * advance;
+      });
       ctx.restore();
     }
 
-    function drawPreset() {
-      const primary = primaryInput.value;
-      const secondary = secondaryInput.value;
-      const gradient = ctx.createLinearGradient(0, 0, SIZE, SIZE);
-      if (state.frame === "festival") {
-        gradient.addColorStop(0, "#f97316");
-        gradient.addColorStop(.55, "#ef4444");
-        gradient.addColorStop(1, "#facc15");
-      } else if (state.frame === "tech") {
-        gradient.addColorStop(0, "#07162f");
-        gradient.addColorStop(.5, "#0b3c73");
-        gradient.addColorStop(1, "#081229");
-      } else {
-        gradient.addColorStop(0, primary);
-        gradient.addColorStop(.5, secondary);
-        gradient.addColorStop(1, primary);
-      }
-      drawCircle(CX, CY, 535, gradient);
-      drawCircle(CX, CY, 478, "rgba(255,255,255,.95)");
+    function drawSchoolFrame() {
+      drawCircle(CX, CY, 540, primaryInput.value);
       drawPhoto(true);
-      ctx.beginPath();
-      ctx.arc(CX, CY, PHOTO_RADIUS + 8, 0, Math.PI * 2);
-      ctx.strokeStyle = state.frame === "tech" ? "#24e1f2" : "rgba(255,255,255,.98)";
-      ctx.lineWidth = 12;
-      ctx.stroke();
+      ctx.save();
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 4;
+      [528, 447].forEach(radius => {
+        ctx.beginPath();
+        ctx.arc(CX, CY, radius, 0, Math.PI * 2);
+        ctx.stroke();
+      });
+      drawArcText("CAO ĐẲNG CÔNG THƯƠNG TP.HCM", 487, -Math.PI / 2, Math.PI - .18, 52);
+      drawArcText("HO CHI MINH CITY INDUSTRY AND TRADE COLLEGE", 487, Math.PI / 2, Math.PI - .18, 43, true);
+      ctx.fillStyle = "#fff";
+      ctx.font = "34px Arial, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("★", CX - 487, CY);
+      ctx.fillText("★", CX + 487, CY);
+      ctx.restore();
+      drawWelcomeText();
+    }
 
-      if (state.frame === "tech") {
-        for (let i = 0; i < 40; i++) {
-          const a = (i / 40) * Math.PI * 2;
-          ctx.beginPath();
-          ctx.moveTo(CX + Math.cos(a) * 489, CY + Math.sin(a) * 489);
-          ctx.lineTo(CX + Math.cos(a) * (i % 5 === 0 ? 521 : 508), CY + Math.sin(a) * (i % 5 === 0 ? 521 : 508));
-          ctx.strokeStyle = i % 5 === 0 ? "#67e8f9" : "#60a5fa";
-          ctx.lineWidth = i % 5 === 0 ? 9 : 4;
-          ctx.stroke();
-        }
-      } else if (state.frame === "festival") {
-        for (let i = 0; i < 36; i++) {
-          const a = (i / 36) * Math.PI * 2;
-          const colors = ["#fff7ed", "#fef08a", "#fb7185", "#ffffff"];
-          drawCircle(CX + Math.cos(a) * 505, CY + Math.sin(a) * 505, i % 3 === 0 ? 9 : 5, colors[i % colors.length]);
-        }
-      } else {
-        for (let i = 0; i < 18; i++) {
-          const a = (i / 18) * Math.PI * 2;
-          drawCircle(CX + Math.cos(a) * 504, CY + Math.sin(a) * 504, 6, "rgba(255,255,255,.7)");
-        }
+    function drawWelcomeText() {
+      ctx.save();
+      ctx.translate(CX, 800);
+      ctx.rotate(-3 * Math.PI / 180);
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      // Hai dòng bên trái; K50 bên phải cao bằng toàn bộ phần chữ này.
+      const leftX = -90;
+      ctx.font = '104px "Snell Roundhand", "Brush Script MT", "Apple Chancery", cursive';
+      const greetingMetrics = ctx.measureText("Chào đón");
+      const top = -58 - greetingMetrics.actualBoundingBoxAscent;
+      ctx.fillStyle = "#142675";
+      ctx.shadowColor = "rgba(255, 255, 255, .95)";
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 1;
+      ctx.fillText("Chào đón", leftX, -58, 420);
+
+      ctx.font = '82px Impact, "Arial Black", sans-serif';
+      const bottom = 29 + ctx.measureText("TÂN SINH VIÊN").actualBoundingBoxDescent;
+      drawGoldText("TÂN SINH VIÊN", leftX, 29, 420);
+
+      ctx.font = '180px Impact, "Arial Black", sans-serif';
+      const kMetrics = ctx.measureText("K50");
+      const heightScale = (bottom - top) /
+        (kMetrics.actualBoundingBoxAscent + kMetrics.actualBoundingBoxDescent);
+      ctx.save();
+      ctx.translate(220, top + kMetrics.actualBoundingBoxAscent * heightScale);
+      ctx.scale(1, heightScale);
+      drawGoldText("K50", 0, 0, 170);
+      ctx.restore();
+      ctx.restore();
+    }
+
+    function drawGoldText(text, x, y, maxWidth) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(Math.min(1, maxWidth / ctx.measureText(text).width), 1);
+      ctx.shadowColor = "rgba(8, 36, 73, .65)";
+      ctx.shadowBlur = 7;
+      ctx.shadowOffsetX = 3;
+      ctx.shadowOffsetY = 6;
+      ctx.fillStyle = "#9c3109";
+      for (let depth = 5; depth >= 1; depth--) {
+        ctx.fillText(text, depth * .45, depth);
       }
-      drawBanner();
+      ctx.shadowColor = "transparent";
+      const metrics = ctx.measureText(text);
+      const gold = ctx.createLinearGradient(0, -metrics.actualBoundingBoxAscent,
+        0, metrics.actualBoundingBoxDescent);
+      gold.addColorStop(0, "#fff4a0");
+      gold.addColorStop(.35, "#ffda38");
+      gold.addColorStop(1, "#ff9418");
+      ctx.fillStyle = gold;
+      ctx.fillText(text, 0, 0);
+      ctx.restore();
     }
 
     function render() {
       ctx.clearRect(0, 0, SIZE, SIZE);
-      if (state.frame === "custom" && state.customFrame) {
-        drawPhoto(false); // Khung PNG tùy biến phủ lên toàn bộ ảnh vuông.
-        ctx.drawImage(state.customFrame, 0, 0, SIZE, SIZE);
-      } else {
-        drawPreset();
-      }
+      drawSchoolFrame();
     }
 
     function loadImage(file) {
@@ -681,34 +609,13 @@
       } catch (error) { setStatus(error.message); }
     });
 
-    frameInput.addEventListener("change", async () => {
-      const file = frameInput.files?.[0];
-      if (!file) return;
-      if (file.type !== "image/png") { setStatus("Khung tải lên phải là tệp PNG."); return; }
-      try {
-        state.customFrame = await loadImage(file);
-        state.frame = "custom";
-        document.querySelectorAll("[data-frame]").forEach(btn => btn.setAttribute("aria-pressed", "false"));
-        setStatus(`Đã chọn khung: ${file.name}`);
-        render();
-      } catch (error) { setStatus(error.message); }
-    });
-
-    document.querySelectorAll("[data-frame]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        state.frame = btn.dataset.frame;
-        document.querySelectorAll("[data-frame]").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
-        render();
-      });
-    });
-
     zoomInput.addEventListener("input", () => {
       state.zoom = Number(zoomInput.value);
       zoomValue.textContent = `${Math.round(state.zoom * 100)}%`;
       clampPosition();
       render();
     });
-    [bannerInput, primaryInput, secondaryInput].forEach(input => input.addEventListener("input", render));
+    [primaryInput, secondaryInput].forEach(input => input.addEventListener("input", render));
 
     el("#resetBtn").addEventListener("click", () => {
       state.zoom = 1;
